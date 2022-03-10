@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Passwords</h1>
+
+<div id="passwords">
+  <% @passwords.each do |password| %>
+    <%= render password %>
+    <p>
+      <%= link_to "Show this password", password %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New password", new_password_path %>
