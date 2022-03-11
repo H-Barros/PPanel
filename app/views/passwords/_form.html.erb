@@ -12,11 +12,6 @@
   <% end %>
 
   <div>
-    <%= form.label :number, style: "display: block" %>
-    <%= form.text_field :number %>
-  </div>
-
-  <div>
     <%= form.label :preferential, style: "display: block" %>
     <%= form.check_box :preferential %>
   </div>
@@ -31,27 +26,7 @@
     <%= form.text_field :service %>
   </div>
 
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.label :canceled, style: "display: block" %>
-    <%= form.check_box :canceled %>
-  </div>
-
-  <div>
-    <%= form.label :start_attendance, style: "display: block" %>
-    <%= form.datetime_field :start_attendance %>
-  </div>
-
-  <div>
-    <%= form.label :end_attendance, style: "display: block" %>
-    <%= form.datetime_field :end_attendance %>
-  </div>
-
-  <div>
+  <div class="mt-2">
     <%= form.submit %>
   </div>
 <% end %>

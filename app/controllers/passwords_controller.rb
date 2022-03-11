@@ -2,27 +2,21 @@ class PasswordsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_password, only: %i[ show edit update destroy ]
 
-  # GET /passwords or /passwords.json
   def index
     @passwords = Password.all
   end
 
-  # GET /passwords/1 or /passwords/1.json
   def show
   end
 
-  # GET /passwords/new
   def new
     @password = Password.new
   end
 
-  # GET /passwords/1/edit
-  def edit
-  end
-
-  # POST /passwords or /passwords.json
   def create
     @password = Password.new(password_params)
+    @password.user_id = current_user.id
+    @password.password_number_generator
 
     respond_to do |format|
       if @password.save
@@ -35,7 +29,6 @@ class PasswordsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /passwords/1 or /passwords/1.json
   def update
     respond_to do |format|
       if @password.update(password_params)
@@ -45,16 +38,6 @@ class PasswordsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @password.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /passwords/1 or /passwords/1.json
-  def destroy
-    @password.destroy
-
-    respond_to do |format|
-      format.html { redirect_to passwords_url, notice: "Password was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
