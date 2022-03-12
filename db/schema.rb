@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_10_012720) do
     t.boolean "preferential", default: false
     t.string "sector"
     t.string "service"
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.boolean "canceled", default: false
     t.datetime "start_attendance"
     t.datetime "end_attendance"

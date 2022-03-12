@@ -1,5 +1,5 @@
 class Password < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
 
   def password_number_generator
     self.preferential ? pwd_number = "P" : pwd_number = "G"

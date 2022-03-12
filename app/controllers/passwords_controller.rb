@@ -1,5 +1,5 @@
 class PasswordsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[ new create ]
   before_action :set_password, only: %i[ show edit update destroy ]
 
   def index
@@ -15,7 +15,6 @@ class PasswordsController < ApplicationController
 
   def create
     @password = Password.new(password_params)
-    @password.user_id = current_user.id
     @password.password_number_generator
 
     respond_to do |format|
