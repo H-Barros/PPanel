@@ -14,10 +14,12 @@ class Password < ApplicationRecord
     return disponible_passwords.length
   end
 
-  def self.next_password_preferencial?
+  def self.next_password_preferential?
     lasts_two_passwords = self.where("start_attendance is not null").order(start_attendance: :desc).limit(2)
 
-    if lasts_two_passwords[0].preferential && lasts_two_passwords[1].preferential
+    if lasts_two_passwords.length < 2
+      return true
+    elsif lasts_two_passwords[0].preferential && lasts_two_passwords[1].preferential
       return false
     else
       return true
@@ -25,31 +27,19 @@ class Password < ApplicationRecord
   end
 
     def self.next_password
-      preferential_passwords = self.where(preferencial: true, inicio_atendimento: nil).order(created_at: :asc).limit(1)
-      general_passwords = self.where(preferencial: false, inicio_atendimento: nil).order(created_at: :asc).limit(1)
+      preferential_passwords = self.where(preferential: true, start_attendance: nil).order(created_at: :asc).limit(1)
+      general_passwords = self.where(preferential: false, start_attendance: nil).order(created_at: :asc).limit(1)
 
       if self.passwords_in_queue == 0
         password = "Indisponible"
-      elsif self.next_password_preferencial? && !preferential_passwords.empty?
+      elsif self.next_password_preferential? && !preferential_passwords.empty?
         password = self.find(preferential_passwords[0].id)
-        password.start_attendance = Time.new
-        password.user_id = current_user.id
-        password.save
-      elsif !self.next_password_preferencial? && !general_passwords.empty?
+      elsif !self.next_password_preferential? && !general_passwords.empty?
         password = self.find(general_passwords[0].id)
-        password.start_attendance = Time.new
-        password.user_id = current_user.id
-        password.save
-      elsif self.next_password_preferencial? && preferential_passwords.empty?
+      elsif self.next_password_preferential? && preferential_passwords.empty?
         password = self.find(general_passwords[0].id)
-        password.start_attendance = Time.new
-        password.user_id = current_user.id
-        password.save
-      elsif !self.next_password_preferencial? && general_passwords.empty?
+      elsif !self.next_password_preferential? && general_passwords.empty?
         password = self.find(preferential_passwords[0].id)
-        password.start_attendance = Time.new
-        password.user_id = current_user.id
-        password.save
       end
 
       return password

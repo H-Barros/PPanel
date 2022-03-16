@@ -1,5 +1,4 @@
 class PasswordsController < ApplicationController
-  before_action :authenticate_user!, except: %i[ new create ]
   before_action :set_password, only: %i[ show edit update destroy ]
 
   def index
@@ -38,6 +37,13 @@ class PasswordsController < ApplicationController
         format.json { render json: @password.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def next_password
+    @next_password = Password.next_password
+    @next_password.start_attendance = Time.new
+    @next_password.user_id = current_user.id
+    @next_password.save
   end
 
   private
