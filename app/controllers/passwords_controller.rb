@@ -41,9 +41,13 @@ class PasswordsController < ApplicationController
 
   def next_password
     @next_password = Password.next_password
-    @next_password.start_attendance = Time.new
-    @next_password.user_id = current_user.id
-    @next_password.save
+    if @next_password != {"message": "Indisponible"}
+      @next_password.start_attendance = Time.new
+      @next_password.user_id = current_user.id
+      @next_password.save
+    end
+
+    render json: @next_password
   end
 
   private

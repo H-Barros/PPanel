@@ -31,7 +31,7 @@ class Password < ApplicationRecord
       general_passwords = self.where(preferential: false, start_attendance: nil).order(created_at: :asc).limit(1)
 
       if self.passwords_in_queue == 0
-        password = "Indisponible"
+        password = {"message": "Indisponible"}
       elsif self.next_password_preferential? && !preferential_passwords.empty?
         password = self.find(preferential_passwords[0].id)
       elsif !self.next_password_preferential? && !general_passwords.empty?

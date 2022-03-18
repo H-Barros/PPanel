@@ -1,11 +1,11 @@
-<div class="container mt-3">
+<div data-controller="attendance" class="container mt-3">
   <div class="row align-items-center">
     <div class="col-sm-4 .h-100">
       <div class="card mx-2">
         <div class="card-body">
           <h5 class="card-title text-center">Guiche: Nome do Guiche</h5>
           <p class="card-text text-center">
-            <button type="button" class="btn btn-primary mt-5 col-8" id="call_password">Chamar Senha</button>
+            <button data-action="click->attendance#call" type="button" class="btn btn-primary mt-5 col-8" id="call_password">Chamar Senha</button>
             <button type="button" class="btn btn-success mt-2 col-8" id="end_password">Finalizar Senha</button>
             <button type="button" class="btn btn-danger mt-2 col-8" id="cancel_password">Cancelar Senha</button>
           </p>
@@ -15,19 +15,19 @@
     <div class="col-sm-8 .h-100">
       <div class="card mx-2">
         <div class="card-body">
-          <h5 class="card-title text-center" id="password_number">Senha: ???</h5>
+          <h5 class="card-title text-center" id="password_number">Senha: <span data-attendance-target="password"></span></h5>
           <p class="card-text">
             <div class="row mt-5 justify-content-center">
               <div class=" col-6 card text-dark bg-light mb-3 me-3" style="max-width: 18rem;">
                 <div class="card-body">
                   <h5 class="card-title" id="password_sector">Setor</h5>
-                  <p class="card-text text-end">???</p>
+                  <p data-attendance-target="sector" class="card-text text-end">???</p>
                 </div>
               </div>            
               <div class="col-6 card text-dark bg-light mb-3" style="max-width: 18rem;">
                 <div class="card-body">
                   <h5 class="card-title" id="pasword_service">Serviço</h5>
-                  <p class="card-text text-end">???</p>
+                  <p data-attendance-target="service" class="card-text text-end">???</p>
                 </div>
               </div>     
             </div>
