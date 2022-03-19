@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get "/nextpassword", to: "attendance#next_password"
   get "/endpassword/:id", to: "attendance#end_password"
   get "/cancelpassword/:id", to: "attendance#cancel_password"
+  get "/report", to: "reports#report"
 end
