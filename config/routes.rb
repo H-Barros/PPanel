@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
 
   get "/attendance", to: "attendance#panel"
-  get "/nextpassword", to: "passwords#next_password"
+  get "/nextpassword", to: "attendance#next_password"
+  get "/endpassword/:id", to: "attendance#end_password"
+  get "/cancelpassword/:id", to: "attendance#cancel_password"
 end

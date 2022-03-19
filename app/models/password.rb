@@ -3,7 +3,13 @@ class Password < ApplicationRecord
 
   def password_number_generator
     self.preferential ? pwd_number = "P" : pwd_number = "G"
-    Password.last == nil ? pwd_number += "0001" : pwd_number += "000#{Password.last.id.to_s}"
+
+    if Password.last == nil
+      pwd_number += "0001"
+    else 
+      password_number = Password.last.id + 1
+      pwd_number += "000#{password_number.to_s}"
+    end
 
     self.number = pwd_number
   end

@@ -39,17 +39,6 @@ class PasswordsController < ApplicationController
     end
   end
 
-  def next_password
-    @next_password = Password.next_password
-    if @next_password != {"message": "Indisponible"}
-      @next_password.start_attendance = Time.new
-      @next_password.user_id = current_user.id
-      @next_password.save
-    end
-
-    render json: @next_password
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_password
