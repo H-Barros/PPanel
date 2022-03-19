@@ -13,7 +13,7 @@ class CreatePasswordForm
   end
 
   def save
-    return false if invalid?
+    return false unless valid?
 
     password = Password.new(sector: @sector, service: @service, preferential: @preferential)
     password.password_number_generator
