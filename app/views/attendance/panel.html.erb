@@ -6,8 +6,8 @@
           <h5 class="card-title text-center">Guiche: Nome do Guiche</h5>
           <p class="card-text text-center">
             <button data-action="click->attendance#call" type="button" class="btn btn-primary mt-5 col-8" id="call_password">Chamar Senha</button>
-            <button type="button" class="btn btn-success mt-2 col-8" id="end_password">Finalizar Senha</button>
-            <button type="button" class="btn btn-danger mt-2 col-8" id="cancel_password">Cancelar Senha</button>
+            <button data-action="click->attendance#end" type="button" class="btn btn-success mt-2 col-8" id="end_password">Finalizar Senha</button>
+            <button data-action="click->attendance#cancel" type="button" class="btn btn-danger mt-2 col-8" id="cancel_password">Cancelar Senha</button>
           </p>
         </div>
       </div>
@@ -16,6 +16,7 @@
       <div class="card mx-2">
         <div class="card-body">
           <h5 class="card-title text-center" id="password_number">Senha: <span data-attendance-target="password"></span></h5>
+          <span data-attendance-target="id" class="d-none"></span>
           <p class="card-text">
             <div class="row mt-5 justify-content-center">
               <div class=" col-6 card text-dark bg-light mb-3 me-3" style="max-width: 18rem;">
