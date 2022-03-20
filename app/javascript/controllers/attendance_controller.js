@@ -5,7 +5,7 @@ const baseUrl = "http://localhost:3000"
 
 // Connects to data-controller="attendance"
 export default class extends Controller {
-  static targets = [ "password", "sector", "service", "id" ]
+  static targets = [ "password", "sector", "service", "id", "guicheName", "inputName", "editIcon", "confirmIcon" ]
   
   async call() {
     const response = await fetch(`${baseUrl}/nextpassword`)
@@ -58,5 +58,24 @@ export default class extends Controller {
     this.serviceTarget.innerHTML = "???"
     this.idTarget.innerHTML = "Undefined"
     }
+  }
+
+  edit_box_name(event) {
+    event.preventDefault()
+
+    this.guicheNameTarget.classList.add("d-none")
+    this.inputNameTarget.classList.remove("d-none")
+    this.editIconTarget.classList.add("d-none")
+    this.confirmIconTarget.classList.remove("d-none")
+  }
+
+  confirm_box_name(event) {
+    event.preventDefault()
+
+    this.guicheNameTarget.innerHTML = this.inputNameTarget.value
+    this.guicheNameTarget.classList.remove("d-none")
+    this.inputNameTarget.classList.add("d-none")
+    this.editIconTarget.classList.remove("d-none")
+    this.confirmIconTarget.classList.add("d-none")
   }
 }
