@@ -3,7 +3,12 @@
     <div class="col-sm-4 .h-100">
       <div class="card mx-2">
         <div class="card-body">
-          <h5 class="card-title text-center">Guiche: Nome do Guiche</h5>
+          <h5 class="card-title text-center">
+            Guiche: <span data-attendance-target="guicheName">Nome do Guiche</span>
+            <input data-attendance-target="inputName" type=text class="form-control d-none">
+            <span data-attendance-target="editIcon" data-action="click->attendance#edit_box_name"><%= link_to image_tag("edit_icon.svg") %></span>
+            <span data-attendance-target="confirmIcon" data-action="click->attendance#confirm_box_name" class="d-none"><%= link_to image_tag("confirm_icon.svg") %></span>
+          </h5>
           <p class="card-text text-center">
             <button data-action="click->attendance#call" type="button" class="btn btn-primary mt-5 col-8" id="call_password">Chamar Senha</button>
             <button data-action="click->attendance#end" type="button" class="btn btn-success mt-2 col-8" id="end_password">Finalizar Senha</button>
