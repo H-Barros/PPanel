@@ -1,16 +1,20 @@
 class AttendanceController < ApplicationController
 
     def panel
+        @passwords_in_queue = Password.passwords_in_queue
     end
 
     def next_password
         @next_password = Password.next_password
+
         if @next_password != {"message": "Indisponible"}
           @next_password.start_attendance = Time.new
           @next_password.user_id = current_user.id
           @next_password.save
         end
-    
+        
+        ActionCable.server.broadcast("password_queue_channel",{passwords_in_queue: "#{Password.passwords_in_queue}"})
+
         render json: @next_password
     end
 

@@ -42,4 +42,15 @@
       </div>
     </div>
   </div>
+
+  <div class="row justify-content-center mt-5">
+    <button class="btn <%= @passwords_in_queue > 0 ? "btn-primary" : "btn-danger" %> position-relative col-auto" id="password_queue_button">
+      <span id="passwords_queue_text">
+        Senhas para atendimendo
+      </span>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="password_queue_badge">
+        <%= @passwords_in_queue %>
+      </span>
+    </button>
+  </div>
 </div>

@@ -10,6 +10,7 @@ class PasswordsController < ApplicationController
 
   def new
     @password = Password.new
+    ActionCable.server.broadcast("password_queue_channel",{passwords_in_queue: "#{Password.passwords_in_queue}"})
   end
 
   def create
