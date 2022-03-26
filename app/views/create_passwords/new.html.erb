@@ -1,0 +1,20 @@
+<%= form_with(model: @form) do |f| %>
+  <div>
+    <%= f.label :preferential, style: "display: block" %>
+    <%= f.check_box :preferential %>
+  </div>
+
+  <div>
+    <%= f.label :sector, style: "display: block" %>
+    <%= f.text_field :sector %>
+  </div>
+
+  <div>
+    <%= f.label :service, style: "display: block" %>
+    <%= f.text_field :service %>
+  </div>
+
+  <div class="mt-2">
+    <%= f.submit "Gerar Senha" %>
+  </div>
+<% end %>
