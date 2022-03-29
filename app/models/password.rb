@@ -52,7 +52,7 @@ class Password < ApplicationRecord
       password = self.find(preferential_passwords[0].id)
     end
 
-    return passwords_in_queue
+    return password
   end
 
   def self.lasts_passwords(number)
