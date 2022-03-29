@@ -2,6 +2,7 @@ class CreatePasswords < ActiveRecord::Migration[7.0]
   def change
     create_table :passwords do |t|
       t.string :number, null: false
+      t.string :desk
       t.boolean :preferential, default: false
       t.string :sector
       t.string :service

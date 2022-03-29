@@ -1,2 +1,3 @@
 // Import all the channels to be used by Action Cable
-import "./password_queue_channel"
+import "./attendance_channel"
+import "./client_panel_channel"

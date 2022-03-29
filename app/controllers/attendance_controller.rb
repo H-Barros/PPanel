@@ -9,11 +9,13 @@ class AttendanceController < ApplicationController
 
         if @next_password != {"message": "Indisponible"}
           @next_password.start_attendance = Time.new
+          @next_password.desk = params[:desk]
           @next_password.user_id = current_user.id
           @next_password.save
         end
         
-        ActionCable.server.broadcast("password_queue_channel",{passwords_in_queue: "#{Password.passwords_in_queue}"})
+        ActionCable.server.broadcast("attendance_channel",{passwords_in_queue: "#{Password.passwords_in_queue}"})
+        ActionCable.server.broadcast("client_panel_channel",{passwords: Password.lasts_passwords(6).as_json, next_password: @next_password})
 
         render json: @next_password
     end

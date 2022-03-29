@@ -1,6 +1,6 @@
-class PasswordQueueChannel < ApplicationCable::Channel
+class AttendanceChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "password_queue_channel"
+    stream_from "attendance_channel"
   end
 
   def unsubscribed

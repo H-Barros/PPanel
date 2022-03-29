@@ -8,7 +8,8 @@ export default class extends Controller {
   static targets = [ "password", "sector", "service", "id", "guicheName", "inputName", "editIcon", "confirmIcon" ]
   
   async call() {
-    const response = await fetch(`${baseUrl}/nextpassword`)
+    console.log(this.guicheNameTarget.innerHTML)
+    const response = await fetch(`${baseUrl}/nextpassword?desk=${this.guicheNameTarget.innerHTML}`)
     const password = await response.json()
 
     if (password.number == undefined) {

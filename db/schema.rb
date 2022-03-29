@@ -16,6 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_10_012720) do
 
   create_table "passwords", force: :cascade do |t|
     t.string "number", null: false
+    t.string "desk"
     t.boolean "preferential", default: false
     t.string "sector"
     t.string "service"

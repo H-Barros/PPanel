@@ -15,13 +15,13 @@ class Password < ApplicationRecord
   end
 
   def self.passwords_in_queue
-    disponible_passwords = self.where("start_attendance is null")
+    disponible_passwords = self.where("start_attendance is ?", nil)
 
     return disponible_passwords.length
   end
 
   def self.next_password_preferential?
-    lasts_two_passwords = self.where("start_attendance is not null").order(start_attendance: :desc).limit(2)
+    lasts_two_passwords = self.where("start_attendance is not ?", nil).order(start_attendance: :desc).limit(2)
 
     if lasts_two_passwords.length < 2
       return true
@@ -49,5 +49,9 @@ class Password < ApplicationRecord
       end
 
       return password
+    end
+
+    def self.lasts_passwords(number)
+      self.order(start_attendance: :desc).limit(number)
     end
 end
