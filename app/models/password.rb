@@ -1,6 +1,7 @@
 class Password < ApplicationRecord
   belongs_to :user, optional: true
 
+  # create_password_form
   def password_number_generator
     self.preferential ? pwd_number = "P" : pwd_number = "G"
 
@@ -14,12 +15,14 @@ class Password < ApplicationRecord
     self.number = pwd_number
   end
 
+  # password_queue
   def self.passwords_in_queue
     disponible_passwords = self.where("start_attendance is null")
 
     return disponible_passwords.length
   end
 
+  # next_password
   def self.next_password_preferential?
     lasts_two_passwords = self.where("start_attendance is not null").order(start_attendance: :desc).limit(2)
 
@@ -32,22 +35,23 @@ class Password < ApplicationRecord
     end
   end
 
-    def self.next_password
-      preferential_passwords = self.where(preferential: true, start_attendance: nil).order(created_at: :asc).limit(1)
-      general_passwords = self.where(preferential: false, start_attendance: nil).order(created_at: :asc).limit(1)
+  # next_password
+  def self.next_password
+    preferential_passwords = self.where(preferential: true, start_attendance: nil).order(created_at: :asc).limit(1)
+    general_passwords = self.where(preferential: false, start_attendance: nil).order(created_at: :asc).limit(1)
 
-      if self.passwords_in_queue == 0
-        password = {"message": "Indisponible"}
-      elsif self.next_password_preferential? && !preferential_passwords.empty?
-        password = self.find(preferential_passwords[0].id)
-      elsif !self.next_password_preferential? && !general_passwords.empty?
-        password = self.find(general_passwords[0].id)
-      elsif self.next_password_preferential? && preferential_passwords.empty?
-        password = self.find(general_passwords[0].id)
-      elsif !self.next_password_preferential? && general_passwords.empty?
-        password = self.find(preferential_passwords[0].id)
-      end
-
-      return password
+    if self.passwords_in_queue == 0
+      password = {"message": "Indisponible"}
+    elsif self.next_password_preferential? && !preferential_passwords.empty?
+      password = self.find(preferential_passwords[0].id)
+    elsif !self.next_password_preferential? && !general_passwords.empty?
+      password = self.find(general_passwords[0].id)
+    elsif self.next_password_preferential? && preferential_passwords.empty?
+      password = self.find(general_passwords[0].id)
+    elsif !self.next_password_preferential? && general_passwords.empty?
+      password = self.find(preferential_passwords[0].id)
     end
+
+    return password
+  end
 end

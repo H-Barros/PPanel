@@ -4,7 +4,6 @@ class CreatePasswordsController < ApplicationController
 
   def new
     @form = CreatePasswordForm.new
-    puts current_user.id
   end
 
   def create
@@ -19,7 +18,6 @@ class CreatePasswordsController < ApplicationController
   private
 
   def create_password_form_params
-    puts params
     params.require(:create_password_form).permit(:sector, :service, :preferential)
   end
 end

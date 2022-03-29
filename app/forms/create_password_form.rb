@@ -9,7 +9,6 @@ class CreatePasswordForm
   def initialize(params = {})
     super(params)
     password_number_generator()
-    
   end
 
   def save
