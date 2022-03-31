@@ -55,7 +55,7 @@ class Password < ApplicationRecord
     return password
   end
 
-  def self.lasts_passwords(number)
-    self.order(start_attendance: :desc).limit(number)
+  def self.last_answered_passwords(number)
+    self.where("start_attendance is not null").order(start_attendance: :desc).limit(number)
   end
 end

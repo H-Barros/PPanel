@@ -10,7 +10,8 @@
             <span data-attendance-target="confirmIcon" data-action="click->attendance#confirm_box_name" class="d-none"><%= link_to image_tag("confirm_icon.svg") %></span>
           </h5>
           <p class="card-text text-center">
-            <button data-action="click->attendance#call" type="button" class="btn btn-primary mt-5 col-8" id="call_password">Chamar Senha</button>
+            <button data-action="click->attendance#call" type="button" class="btn btn-primary mt-5 col-8" data-attendance-target="callButton" id="call_password">Chamar Senha</button>
+            <button data-action="click->attendance#recall" type="button" class="btn btn-primary mt-5 col-8 d-none" data-attendance-target="recallButton" id="recall_password">Chamar Novamente</button>
             <button data-action="click->attendance#end" type="button" class="btn btn-success mt-2 col-8" id="end_password">Finalizar Senha</button>
             <button data-action="click->attendance#cancel" type="button" class="btn btn-danger mt-2 col-8" id="cancel_password">Cancelar Senha</button>
           </p>

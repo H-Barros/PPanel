@@ -5,10 +5,9 @@ const baseUrl = "http://localhost:3000"
 
 // Connects to data-controller="attendance"
 export default class extends Controller {
-  static targets = [ "password", "sector", "service", "id", "guicheName", "inputName", "editIcon", "confirmIcon" ]
+  static targets = [ "password", "sector", "service", "id", "guicheName", "inputName", "editIcon", "confirmIcon", "callButton", "recallButton" ]
   
   async call() {
-    console.log(this.guicheNameTarget.innerHTML)
     const response = await fetch(`${baseUrl}/nextpassword?desk=${this.guicheNameTarget.innerHTML}`)
     const password = await response.json()
 
@@ -22,7 +21,19 @@ export default class extends Controller {
       this.sectorTarget.innerHTML = password.sector
       this.serviceTarget.innerHTML = password.service
       this.idTarget.innerHTML = password.id
+      this.callButtonTarget.classList.contains("d-none") ? "" : this.callButtonTarget.classList.add("d-none")
+      this.recallButtonTarget.classList.contains("d-none") ? this.recallButtonTarget.classList.remove("d-none") : ""
     }
+  }
+
+  async recall() {
+    const response = await fetch(`${baseUrl}/recallpassword/${this.idTarget.innerHTML}`)
+    const password = await response.json()
+
+    this.passwordTarget.innerHTML = password.number
+    this.sectorTarget.innerHTML = password.sector
+    this.serviceTarget.innerHTML = password.service
+    this.idTarget.innerHTML = password.id
   }
 
   async end() {
@@ -32,14 +43,18 @@ export default class extends Controller {
       this.passwordTarget.innerHTML = "Por favor chame uma senha primeiro!"
       this.sectorTarget.innerHTML = "???"
       this.serviceTarget.innerHTML = "???"
+      this.callButtonTarget.classList.contains("d-none") ? this.callButtonTarget.classList.remove("d-none") : ""
+      this.recallButtonTarget.classList.contains("d-none") ? "" : this.recallButtonTarget.classList.add("d-none")
     } else {
-    const response = await fetch(`${baseUrl}/endpassword/${password_id}`)
-    const end_password = await response.json()
+      const response = await fetch(`${baseUrl}/endpassword/${password_id}`)
+      const end_password = await response.json()
 
-    this.passwordTarget.innerHTML = end_password.message
-    this.sectorTarget.innerHTML = "???"
-    this.serviceTarget.innerHTML = "???"
-    this.idTarget.innerHTML = "Undefined"
+      this.passwordTarget.innerHTML = end_password.message
+      this.sectorTarget.innerHTML = "???"
+      this.serviceTarget.innerHTML = "???"
+      this.idTarget.innerHTML = "Undefined"
+      this.callButtonTarget.classList.contains("d-none") ? this.callButtonTarget.classList.remove("d-none") : ""
+      this.recallButtonTarget.classList.contains("d-none") ? "" : this.recallButtonTarget.classList.add("d-none")
     }
   }
 
@@ -50,14 +65,18 @@ export default class extends Controller {
       this.passwordTarget.innerHTML = "Por favor chame uma senha primeiro!"
       this.sectorTarget.innerHTML = "???"
       this.serviceTarget.innerHTML = "???"
+      this.callButtonTarget.classList.contains("d-none") ? this.callButtonTarget.classList.remove("d-none") : ""
+      this.recallButtonTarget.classList.contains("d-none") ? "" : this.recallButtonTarget.classList.add("d-none")
     } else {
-    const response = await fetch(`${baseUrl}/cancelpassword/${password_id}`)
-    const end_password = await response.json()
+      const response = await fetch(`${baseUrl}/cancelpassword/${password_id}`)
+      const end_password = await response.json()
 
-    this.passwordTarget.innerHTML = end_password.message
-    this.sectorTarget.innerHTML = "???"
-    this.serviceTarget.innerHTML = "???"
-    this.idTarget.innerHTML = "Undefined"
+      this.passwordTarget.innerHTML = end_password.message
+      this.sectorTarget.innerHTML = "???"
+      this.serviceTarget.innerHTML = "???"
+      this.idTarget.innerHTML = "Undefined"
+      this.callButtonTarget.classList.contains("d-none") ? this.callButtonTarget.classList.remove("d-none") : ""
+      this.recallButtonTarget.classList.contains("d-none") ? "" : this.recallButtonTarget.classList.add("d-none")
     }
   }
 

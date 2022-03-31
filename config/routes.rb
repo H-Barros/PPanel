@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get "/attendance", to: "attendance#panel"
   get "/nextpassword", to: "attendance#next_password"
+  get "/recallpassword/:id", to: "attendance#recall_password"
   get "/endpassword/:id", to: "attendance#end_password"
   get "/cancelpassword/:id", to: "attendance#cancel_password"
 
