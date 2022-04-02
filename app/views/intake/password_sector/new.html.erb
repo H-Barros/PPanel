@@ -1,0 +1,10 @@
+<%= form_with(model: @form) do |f| %>
+  <div>
+    <%= f.label :sector, style: "display: block" %>
+    <%= f.text_field :sector %>
+  </div>
+
+  <div class="mt-2">
+    <%= f.submit "Próximo" %>
+  </div>
+<% end %>

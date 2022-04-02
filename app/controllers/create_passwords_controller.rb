@@ -1,5 +1,5 @@
 class CreatePasswordsController < ApplicationController
-  def index
+  def show
   end
 
   def new

@@ -1,0 +1,10 @@
+<%= form_with(model: @form) do |f| %>
+  <div>
+    <%= f.label :preferential, style: "display: block" %>
+    <%= f.check_box :preferential %>
+  </div>
+
+  <div class="mt-2">
+    <%= f.submit "Salvar" %>
+  </div>
+<% end %>

@@ -1,0 +1,10 @@
+<%= form_with(model: @form) do |f| %>
+  <div>
+    <%= f.label :service, style: "display: block" %>
+    <%= f.text_field :service %>
+  </div>
+
+  <div class="mt-2">
+    <%= f.submit "Próximo" %>
+  </div>
+<% end %>
