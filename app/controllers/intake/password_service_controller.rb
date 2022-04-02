@@ -16,7 +16,6 @@ module Intake
     end
 
     private
-
     def password_service_params
       params.require(:intake_password_service_form).permit(:service)
     end

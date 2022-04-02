@@ -16,7 +16,6 @@ module Intake
     end
 
     private
-
     def password_sector_params
       params.require(:intake_password_sector_form).permit(:sector)
     end

@@ -14,11 +14,13 @@ class CreatePasswordForm
   def save
     return false unless valid?
 
-    password = Password.new(number: @number, sector: @sector, service: @service, preferential: @preferential)
-    
-    password.save
+    @password = Password.create(number: @number, sector: @sector, service: @service, preferential: @preferential)
 
-    return true
+    true
+  end
+
+  def linked_password
+    @password
   end
 
   private

@@ -7,8 +7,12 @@ Rails.application.routes.draw do
     resources :password_preferential_forms, controller: "password_preferential", only: %i[new create]
   end
 
+  resources :create_password_forms, controller: "create_passwords", only: %i[create show] do
+    get "confirm", on: :collection
+  end
+
   resources :passwords
-  resources :create_password_forms, controller: "create_passwords", only: %i[show new create]
+  
   devise_for :users, controllers: { registrations: "registrations" }
 
   get "/attendance", to: "attendance#panel"
