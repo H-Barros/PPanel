@@ -3,8 +3,9 @@
 <%= render @password %>
 
 <div>
-  <%= link_to "Edit this password", edit_password_path(@password) %> |
   <%= link_to "Back to passwords", passwords_path %>
-
-  <%= button_to "Destroy this password", @password, method: :delete %>
 </div>
+
+<h1>QRCODE will be here</h1>
+
+<%= @password.inspect %>

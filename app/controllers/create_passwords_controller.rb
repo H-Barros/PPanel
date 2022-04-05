@@ -1,29 +1,34 @@
 class CreatePasswordsController < ApplicationController
-  before_action :set_password, only: %i[show]
-
-  def show
-  end
+  after_action :broadcast_password_in_queue, only: %i[confirm]
+  after_action :clear_session, only: %i[create]
 
   def confirm
+    # não pode retornar para essa ação
     @form = CreatePasswordForm.new(create_password_form_params)
   end
 
   def create
     @form = CreatePasswordForm.new(create_password_form_params)
     if @form.save
-      redirect_to create_password_form_url(@form.linked_password), notice: 'Thank you'
+      redirect_to password_url(@form.linked_password), notice: 'Thank you'
     else
-      render :new
+      render :confirm
     end
   end
 
   private
-  def set_password
-    @password = Password.find(params[:id])
-  end
-
   def create_password_form_params
     recovered_session = [session[:password_sector], session[:password_service], session[:password_preferential]]
     recovered_session.inject(&:merge)
-  end  
+  end
+
+  def broadcast_password_in_queue
+    ActionCable.server.broadcast("attendance_channel",{passwords_in_queue: "#{Password.passwords_in_queue}"})
+  end
+
+  def clear_session
+    session.delete("password_sector")
+    session.delete("password_service")
+    session.delete("password_preferential")
+  end
 end
