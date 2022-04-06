@@ -1,20 +1,6 @@
-<%= form_with(model: @form) do |f| %>
-  <div>
-    <%= f.label :preferential, style: "display: block" %>
-    <%= f.check_box :preferential %>
-  </div>
-
-  <div>
-    <%= f.label :sector, style: "display: block" %>
-    <%= f.text_field :sector %>
-  </div>
-
-  <div>
-    <%= f.label :service, style: "display: block" %>
-    <%= f.text_field :service %>
-  </div>
-
-  <div class="mt-2">
-    <%= f.submit "Gerar Senha" %>
-  </div>
+<%= simple_form_for @form do |f| %>
+  <%= f.input :sector, disabled: true %>
+  <%= f.input :service, disabled: true %>
+  <%= f.input :preferential, as: :boolean, disabled: true %>
+  <%= f.button :submit, class: "btn btn-primary" %>
 <% end %>

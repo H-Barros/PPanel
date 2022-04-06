@@ -1,5 +1,5 @@
 class CreatePasswordsController < ApplicationController
-  after_action :broadcast_password_in_queue, only: %i[confirm]
+  after_action :broadcast_passwords_in_queue, only: %i[confirm]
   after_action :clear_session, only: %i[create]
 
   def confirm
@@ -22,7 +22,7 @@ class CreatePasswordsController < ApplicationController
     recovered_session.inject(&:merge)
   end
 
-  def broadcast_password_in_queue
+  def broadcast_passwords_in_queue
     ActionCable.server.broadcast("attendance_channel",{passwords_in_queue: "#{Password.passwords_in_queue}"})
   end
 

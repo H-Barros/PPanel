@@ -76,3 +76,5 @@ end
 
 # Custom
 gem "devise"
+gem "simple_form"
+gem 'show_for'
