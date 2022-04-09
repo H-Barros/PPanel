@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PPanel</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="<%= root_path %>">
+          <%= image_tag("logotipo.png", alt: "Icon", class: "img-fluid", size: "100x20") %>
+        </a>
+
+        <% if current_page?(new_user_session_path) %>
+            <div class="d-flex">
+                <%= link_to :Cadastrar, new_user_registration_path, class: "btn btn-outline-light" %>
+            </div>
+        <% end %>
+
+        <% if current_page?(new_user_registration_path) %>
+            <div class="d-flex my-2">
+                <%= link_to :Entrar, new_user_session_path, class: "btn btn-outline-light" %>
+            </div> 
+        <% end %>     
+      </div>
+    </nav>
+
+    <div class="container">
+      <%= yield %>
+    </div>
+    
+    <footer class="mt-4 text-end bg-primary text-white p-2">
+        Em desenvolvimento desde <%= Date.current.year %>.
+    </footer>
+  </body>
+</html>
