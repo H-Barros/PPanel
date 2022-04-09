@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PPanel - Home</title>
+    <title>PPanel</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -16,24 +16,48 @@
         <a class="navbar-brand" href="http://localhost:3000/">
           <%= image_tag("logotipo.png", alt: "Icon", class: "img-fluid", size: "100x20") %>
         </a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <%= link_to :Atendimento, attendance_path, class: "nav-link" %>
             </li>
+            
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <%= link_to "Painel do Client", clientpanel_path, class: "nav-link", target: :_blank %>
+            </li>
+
+            <li class="nav-item">
+              <div class="nav-link"> Gerar Senha </div>
             </li>
           </ul>
-          <div class="d-flex">
-            <div class="btn btn-outline-light me-2">Cadastrar</div>
-          </div>
-          <div class="d-flex my-2">
-            <div class="btn btn-outline-light">Entrar</div>
-          </div>
+
+          <% if user_signed_in? %>
+            <div class="d-flex">
+              <%= link_to :Perfil, edit_user_registration_path, class: "btn btn-outline-light me-2" %>
+            </div>
+
+            <div class="d-flex my-2">
+              <%= link_to :Sair, destroy_user_session_path, class: "btn btn-outline-light me-2" %>
+            </div>
+          <% end %>
+
+          <% if !user_signed_in? %>
+            <div class="d-flex">
+              <%= link_to :Cadastrar, new_user_registration_path, class: "btn btn-outline-light me-2" %>
+            </div>
+
+            <div class="d-flex my-2">
+              <%= link_to :Entrar,
+              user_signed_in? ? attendance_path : new_user_session_path, 
+              class: "btn btn-outline-light" %>
+            </div>
+          <% end %>
         </div>
       </div>
     </nav>
