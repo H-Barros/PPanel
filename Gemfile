@@ -78,3 +78,6 @@ end
 gem "devise"
 gem "simple_form"
 gem 'show_for'
+gem "rqrcode", "~> 2.1"
+
+gem "chunky_png", "~> 1.4"
